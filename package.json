@@ -1,0 +1,26 @@
+{
+  "name": "projeto-portiflio-pessoal-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PedroMendes414/Projeto-Portiflio-Pessoal-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PedroMendes414/Projeto-Portiflio-Pessoal-API/issues"
+  },
+  "homepage": "https://github.com/PedroMendes414/Projeto-Portiflio-Pessoal-API#readme",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

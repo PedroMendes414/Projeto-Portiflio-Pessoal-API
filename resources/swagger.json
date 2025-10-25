@@ -1,0 +1,210 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Cadastro de Artigos QA",
+    "version": "1.0.0",
+    "description": "API para cadastro, busca e remoção de artigos na área de QA. Requer autenticação JWT."
+  },
+  "paths": {
+    "/users/register": {
+      "post": {
+        "summary": "Registrar novo usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" },
+                  "role": { "type": "string", "enum": ["normal", "admin"] }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuário criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": { "description": "Usuário já existe" }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "summary": "Login de usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login bem-sucedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "Credenciais inválidas" }
+        }
+      }
+    },
+    "/articles": {
+      "post": {
+        "summary": "Registrar artigo",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "content": { "type": "string" }
+                },
+                "required": ["title", "content"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Artigo criado",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Article" }
+              }
+            }
+          },
+          "400": { "description": "Título e conteúdo são obrigatórios" },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
+        }
+      },
+      "get": {
+        "summary": "Listar artigos",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Lista de artigos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Article" }
+                }
+              }
+            }
+          },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
+        }
+      }
+    },
+    "/articles/search": {
+      "get": {
+        "summary": "Buscar artigos por texto",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artigos encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Article" }
+                }
+              }
+            }
+          },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
+        }
+      }
+    },
+    "/articles/{id}": {
+      "delete": {
+        "summary": "Remover artigo",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Artigo removido" },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Sem permissão para remover este artigo ou token inválido" },
+          "404": { "description": "Artigo não encontrado" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "username": { "type": "string" },
+          "role": { "type": "string" }
+        }
+      },
+      "Article": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "authorId": { "type": "integer" }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
