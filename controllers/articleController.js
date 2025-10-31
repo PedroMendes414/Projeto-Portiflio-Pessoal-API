@@ -1,4 +1,4 @@
-const { registerArticle, listArticles, searchArticle, deleteArticle } = require('../service/articleService');
+const { registerArticle, listArticles, searchArticle, getArticle, deleteArticle } = require('../service/articleService');
 
 exports.create = (req, res, next) => {
   try {
@@ -22,6 +22,15 @@ exports.search = (req, res, next) => {
   try {
     const articles = searchArticle(req.query.q || '');
     res.status(200).json(articles);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getById = (req, res, next) => {
+  try {
+    const article = getArticle(parseInt(req.params.id));
+    res.status(200).json(article);
   } catch (err) {
     next(err);
   }

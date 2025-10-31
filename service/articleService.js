@@ -16,6 +16,12 @@ function searchArticle(query) {
   return searchArticles(query);
 }
 
+function getArticle(id) {
+  const article = getArticleById(id);
+  if (!article) throw { status: 404, message: 'Artigo não encontrado' };
+  return article;
+}
+
 function deleteArticle(id, user) {
   const article = getArticleById(id);
   if (!article) throw { status: 404, message: 'Artigo não encontrado' };
@@ -26,4 +32,4 @@ function deleteArticle(id, user) {
   throw { status: 403, message: 'Sem permissão para remover este artigo' };
 }
 
-module.exports = { registerArticle, listArticles, searchArticle, deleteArticle };
+module.exports = { registerArticle, listArticles, searchArticle, getArticle, deleteArticle };
