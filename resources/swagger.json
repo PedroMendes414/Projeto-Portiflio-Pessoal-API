@@ -159,6 +159,28 @@
       }
     },
     "/articles/{id}": {
+      "get": {
+        "summary": "Obter detalhes de um artigo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do artigo",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Article" }
+              }
+            }
+          },
+          "404": { "description": "Artigo não encontrado" }
+        }
+      },
       "delete": {
         "summary": "Remover artigo",
         "security": [{ "bearerAuth": [] }],
