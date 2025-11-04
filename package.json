@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-      "test": "mocha ./tests/**/*.test.js --timeout=200000"
+    "test": "mocha ./tests/test/**/*.test.js --timeout=200000 --reporter mochawesome"
   },
   "repository": {
     "type": "git",
@@ -24,8 +24,10 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^10.1.0",
     "chai": "^6.2.0",
     "mocha": "^11.7.4",
+    "mochawesome": "^7.1.4",
     "supertest": "^7.1.4"
   }
 }
