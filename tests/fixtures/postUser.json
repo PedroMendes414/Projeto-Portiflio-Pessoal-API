@@ -1,0 +1,12 @@
+[
+  {
+    "username": "pedro.oliveiroo",
+    "password": "123456",
+    "role": "admin"
+  },
+  {
+    "username": "joao.silva",
+    "password": "123456",
+    "role": "user"
+  }
+]
