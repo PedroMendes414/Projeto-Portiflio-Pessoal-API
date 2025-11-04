@@ -1,6 +1,9 @@
+require('dotenv').config()
 const request = require('supertest');
 const { expect } = require('chai');
 const { criarUsuario } = require('../helpers/criarUsuario');
+
+const BASE_URL = process.env.API_BASE_URL || 'http://localhost:3000';
 
 describe('Login', () => {
   let usuario;
@@ -10,7 +13,7 @@ describe('Login', () => {
   });
 
   it('Deve retornar 200 com token quando usar credenciais válidas', async () => {
-    const resposta = await request('http://localhost:3000')
+    const resposta = await request(BASE_URL)
       .post('/users/login')
       .set('Content-Type', 'application/json')
       .send({
