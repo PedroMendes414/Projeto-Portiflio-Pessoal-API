@@ -1,4 +1,3 @@
-require('dotenv').config(); // Carrega as variáveis de ambiente do .env
 const request = require('supertest');
 const { faker } = require('@faker-js/faker');
 const postUser = require('../fixtures/postUser.json');
@@ -18,9 +17,12 @@ const criarUsuario = async (role = 'normal') => {
     .set('Content-Type', 'application/json')
     .send(bodyUser);
 
-  return { bodyUser, resposta };
+  return {
+    username: bodyUser.username,
+    password: bodyUser.password,
+    role,
+    resposta
+  };
 };
 
-module.exports = {
-  criarUsuario
-};
+module.exports = { criarUsuario };
