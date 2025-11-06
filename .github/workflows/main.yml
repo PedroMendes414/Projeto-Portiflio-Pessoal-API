@@ -26,7 +26,7 @@ jobs:
           sleep 2
 
       - name: Aguardar API subir
-        run: wait-on http://localhost:3000/users
+        run: wait-on http://localhost:3000/articles
 
       - name: Executar testes da API
         run: npm test
