@@ -4,8 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests/test/**/*.test.js --timeout=200000 --reporter mochawesome",
-    "start": "node app.js",
-    "teste-pipeline" : "node app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
