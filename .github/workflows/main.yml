@@ -1,14 +1,21 @@
 name: Projeto Portifolio Pessoal - API
 
 on:
-  workflow_dispatch:
+  push:       
+    branches:
+      - main   
+      - "*"  
+  pull_request:  
+    branches:
+      - main
 
 jobs:
   tests:
     runs-on: ubuntu-latest
+
     env:
+      API_BASE_URL: 'http://localhost:3000'
       PORT: 3000
-      API_BASE_URL: "http://localhost:3000"
 
     steps:
       - name: Checkout do repositório
@@ -17,13 +24,8 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
-      - name: Instalar wait-on
-        run: npm install -g wait-on
-
       - name: Iniciar servidor da API
-        run: |
-          npm start &
-          sleep 2
+        run: npm start &
 
       - name: Executar testes da API
         run: npm test
