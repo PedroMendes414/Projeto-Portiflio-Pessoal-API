@@ -6,7 +6,7 @@ Esse projeto foi desenvolvido na mentoria 2.0 em testes de software do julio de 
 
 # ✅ Objetivo do Projeto
 
-Objetivo do projeto é colocar em prática todos os conhecimentos aprendidos na mentoria 2.0 em testes do software do julio de lima: dentro da aba wiki possui todos os artefatos de testes e dentro de 'issues' possui todos os bugs encontrados no decorrer dos testes
+Objetivo do projeto é colocar em prática todos os conhecimentos aprendidos na mentoria 2.0 em testes do software do julio de lima: dentro da aba wiki possui todos os artefatos de testes e dentro de 'issues' possui todos os bugs encontrados no decorrer dos testes, o projeto possui pipeline configurada para rodar os testes, testes automatizados de api e perfomance
 
 O objetivo desta API é fornecer uma estrutura simples para:
 - ✅ Cadastro de usuários  
