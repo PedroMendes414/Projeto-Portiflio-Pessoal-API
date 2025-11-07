@@ -89,6 +89,44 @@ E também:
    ```
 5. O relatório será gerado em:
 ```bash
-   mochawesome-report/mochawesome.html
+  mochawesome-report/mochawesome.html
  ```
-Consulte o Swagger para detalhes dos endpoints e modelos de resposta.
+# ✅ Testes de perfomance:
+Verifique se o **k6** está instalado:  
+   ```bash
+   k6 version
+   ```
+   Caso não tenha, siga a [documentação oficial](https://k6.io/docs/getting-started/installation/).  
+
+---
+## ▶️ Execução dos testes  
+
+### 1. Definir a `BASE_URL`  
+A URL base da API deve ser informada como variável de ambiente no momento da execução.  
+O valor padrão usado no projeto está em `config/config.local.json`:  
+
+```json
+{
+  "BASE_URL": "http://localhost:3000"
+}
+```
+
+Linux / Mac:  
+```bash
+BASE_URL=http://localhost:3000 k6 run tests/login.test.js
+```
+
+Windows (PowerShell):  
+```powershell
+$env:BASE_URL="http://localhost:3000"; k6 run tests/login.test.js
+```
+### 2. Executar os testes diretamente  
+Login(assim será para todos os testes, basta trocar o nome do teste ao executar):  
+```bash
+ k6 run tests/login.test.js -e BASE_URL=http://localhost:3000
+```
+O arquivo `html-report.html` será gerado na raiz do projeto e pode ser aberto em qualquer navegador.  
+
+---
+
+📊 Com isso, é possível acompanhar a performance da **Banco API** tanto em tempo real quanto por relatórios exportados. 
